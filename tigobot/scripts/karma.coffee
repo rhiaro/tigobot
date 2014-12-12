@@ -30,10 +30,14 @@ module.exports = (robot) ->
         msg.reply tellKarma target
 
     robot.hear /HOW COOL AM I\?$/i, (msg) ->
-        msg.reply tellKarma msg.message.user.name
+        target = msg.message.user.name
+        karma = robot.brain.get target + ":karma"
+        msg.reply karmaMessage karma
 
     robot.hear /(HOW COOL IS )(.*?)\?$/i, (msg) ->
-        msg.reply tellKarma msg.match[2]
+        target = msg.match[2]
+        karma = robot.brain.get target + ":karma"
+        msg.reply karmaMessage karma
 
     tellKarma = (target) ->
         karma = robot.brain.get target + ":karma"
@@ -46,3 +50,23 @@ module.exports = (robot) ->
         if karma is null
             karma = 0
         return response + karma + " karma."
+
+    karmaMessage = (karma) ->
+        if karma > 1000
+            return "OUT. THERE."
+        else if karma > 100
+            return "Cool as a cucumber."
+        else if karma > 50
+            return "Rad, yo."
+        else if karma > 10
+            return "Pretty cool."
+        else if karma > 1
+            return "Well, somebody cares."
+        else if karma > -2
+            return "A bit lame."
+        else if karma > -10
+            return "Proper shit."
+        else if karma > -50
+            return "Largely hated."
+        else
+            return "Literally the worst."
