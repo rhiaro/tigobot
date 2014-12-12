@@ -19,7 +19,7 @@ module.exports = (robot) ->
         msg.send JSON.parse(body).pug
 
   robot.respond /pug bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2]
+    count = msg.match[2] || 0
     if count < 1
       msg.send "I refuse to remove pugs from existence."
     else if count > 10
