@@ -49,10 +49,10 @@ module.exports = (robot) ->
 
     if is_sam
       msg.reply negative_replies[Math.floor(Math.random() * negative_replies.length)]
-    else if is_too_late
-      msg.reply too_late_replies[Math.floor(Math.random() * too_late_replies.length)]
-    else if is_bbq_day
-      msg.reply "If only it was summer, it might be BBQ day. Go on then."
+    #else if is_too_late
+    #  msg.reply too_late_replies[Math.floor(Math.random() * too_late_replies.length)]
+    #else if is_bbq_day
+    #  msg.reply "If only it was summer, it might be BBQ day. Go on then."
     else
       msg.reply positive_replies[Math.floor(Math.random() * positive_replies.length)]
 
