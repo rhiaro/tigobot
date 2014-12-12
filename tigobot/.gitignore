@@ -1,0 +1,5 @@
+*.rdb
+.vagrant
+node_modules
+*.pem
+.DS_Store*
