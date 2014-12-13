@@ -6,7 +6,7 @@
 #   hubot unsort <user> - Unsort the <user> from a house
 #   ?house <user> - Find out which house a user is in
 
-houses = ['Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin']
+houses = ['Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin', 'lol nope muggle']
 
 randomHouse = () -> houses[Math.floor(Math.random() * houses.length)]
 
