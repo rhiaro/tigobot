@@ -20,7 +20,8 @@
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
     "node-uuid": "^1.4.1",
     "xml2js": "^0.1.14",
-    "hubot-tell": "*"
+    "hubot-tell": "*",
+    "reload": "*"
   },
   "engines": {
     "node": ">= 0.8.x",
