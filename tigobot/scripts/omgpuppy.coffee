@@ -20,7 +20,10 @@ module.exports = (robot) ->
 
   robot.respond /(.+) puppy/i, (msg) ->
     breed = msg.match[1]
-    msg.send breed
     msg.http("http://www.thepuppyapi.com/puppy?breed=" + breed)
         .get() (err, res, body) ->
-            msg.send JSON.parse(body).puppy_url
+            puppy_url = JSON.parse(body).puppy_url
+            if puppy_url == ""
+              msg.send "Can't find any puppies :("
+            else
+              msg.send JSON.parse(body).puppy_url
