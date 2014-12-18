@@ -88,7 +88,7 @@ module.exports = (robot) ->
       setTodos person, todos.filter (x) -> x isnt thing
       msg.reply "Nice work, you finished doing " + thing
 
-  robot.hear /BORED$/i, (msg) ->
+  robot.hear /I'M BORED$/i, (msg) ->
     help_message = helpout msg
     if help_message
       msg.reply help_message
