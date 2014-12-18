@@ -22,13 +22,31 @@ module.exports = (robot) ->
   setTodos = (person, todos) ->
     robot.brain.users()[person].todo = todos
 
-  robot.hear /(TODO: |I NEED TO |\[ \] )(.*)$/i, (msg) ->
+  setTodo = (msg, thing) ->
     person = msg.message.user.name
-    thing = msg.match[2].trim()
     if not robot.brain.users()[person].todo
       robot.brain.users()[person].todo = []
     robot.brain.users()[person].todo.push thing
-    msg.reply "You need to " + thing + ". " + msg.random(m_added)
+    "You need to " + thing + ". " + msg.random(m_added)
+
+  helpout = (msg) ->
+    person = msg.message.user.name
+    poorSods = []
+    for k, v of robot.brain.users()
+      if k.name isnt person and robot.brain.users()[k].todo and robot.brain.users()[k].todo.length > 0
+        poorSods.push v.name
+    if poorSods.length > 0
+      helpPerson = msg.random poorSods
+      helpWith = msg.random robot.brain.users()[helpPerson].todo
+      helpMessage = "You could help " + helpPerson + " with " + helpWith + ". You should. I've added it to your list for you."
+      setTodo msg, "Help " + helpPerson + " with " + helpWith + "."
+      helpMessage
+
+  robot.hear /(TODO: |I NEED TO |\[ \] )(.*)$/i, (msg) ->
+    person = msg.message.user.name
+    thing = msg.match[2].trim()
+    setMessage = setTodo msg, thing
+    msg.reply setMessage
 
   robot.hear /(\?)?TODO(\?)?$/i, (msg) ->
     person = msg.message.user.name
@@ -50,6 +68,10 @@ module.exports = (robot) ->
       m = msg.random m_many
     else if c > 0
       m = msg.random m_some
+      #probability = Math.random()
+      #if probability > 0.9
+      #  help_message = helpout msg.message.user.name
+      #  m = m + help_message
     else
       m = msg.random m_none
 
@@ -65,3 +87,8 @@ module.exports = (robot) ->
       todos = getTodos person
       setTodos person, todos.filter (x) -> x isnt thing
       msg.reply "Nice work, you finished doing " + thing
+
+  robot.hear /BORED$/i, (msg) ->
+    help_message = helpout msg
+    if help_message
+      msg.reply help_message
