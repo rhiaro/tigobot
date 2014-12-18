@@ -4,7 +4,7 @@
 # Commands:
 #   butt - adds to your butt count
 #   ?butt [user] - finds out your (or the user you specify) butt count
-#   ?buttmaster - who says butt the most
+#   who is the buttmaster? - who says butt the most
 
 module.exports = (robot) ->
   getButts = (person) ->
