@@ -23,7 +23,7 @@ module.exports = (robot) ->
 
     bwark = (msg) ->
         probability = Math.random()
-        if probability > 0.9
+        if probability > 0.96
             msg.send msg.random noise
 
     robot.hear /(.*)$/, (msg) ->
