@@ -2,8 +2,9 @@
 #   Handy todo lists
 #
 # Commands:
-#   todo: <thing>
-#   todo?
+#   todo: <thing> - add a thing to your todo list
+#   todo? - get your todo list
+#   how many things to do? - Count your todo list and get a motivational message.
 
 module.exports = (robot) ->
 
@@ -21,7 +22,7 @@ module.exports = (robot) ->
   robot.hear /(\?)?TODO(\?)?$/i, (msg) ->
     person = msg.message.user.name
     todos = getTodos person
-    msg.reply todos.join(", ")
+    msg.reply "You need to do: " + todos.join(", ")
 
   robot.hear /SO MANY THINGS TO DO(\!)?|SO MUCH TO DO(\!)?|HOW MANY THINGS TO DO(\?)?$/i, (msg) ->
 
