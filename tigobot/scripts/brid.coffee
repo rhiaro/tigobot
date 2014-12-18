@@ -21,10 +21,14 @@ module.exports = (robot) ->
         "/me puts his face on something."
     ]
 
-    robot.hear /(.*)$/, (msg) ->
+    bwark = (msg) ->
         probability = Math.random()
         if probability > 0.9
             msg.send msg.random noise
 
+    robot.hear /(.*)$/, (msg) ->
+        setTimeout -> bwark msg, 2000
+        
+
     robot.respond /WHOSABIRD/i, (msg) ->
-        msg.send random_text(noise)
+        msg.send msg.random noise
