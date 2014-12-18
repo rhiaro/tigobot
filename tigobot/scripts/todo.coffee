@@ -14,6 +14,8 @@ module.exports = (robot) ->
   m_lots = ["Are you a grad student?", "Better get started then!", "No time like the present.", "Stop procrastinating!", "Get on with something!"]
   m_loads = ["Ouuucchhh", "There's just no way.", "You poor thing.", "You should quit now.", "Delegate to some wee undergrad?"]
 
+  m_added = ["Gotcha.", "I've added that to your list.", "Just ask me if you forget."]
+
   getTodos = (person) ->
     return robot.brain.users()[person].todo
 
@@ -26,7 +28,7 @@ module.exports = (robot) ->
     if not robot.brain.users()[person].todo
       robot.brain.users()[person].todo = []
     robot.brain.users()[person].todo.push thing
-    msg.reply thing + ". Gotcha."
+    msg.reply "You need to " + thing + ". " + msg.random(m_added)
 
   robot.hear /(\?)?TODO(\?)?$/i, (msg) ->
     person = msg.message.user.name
@@ -53,7 +55,7 @@ module.exports = (robot) ->
 
     msg.reply 'You have ' + c + ' things to do. ' + m
 
-  robot.hear /(\[x\] |Done: )(.*)$/i, (msg) ->
+  robot.hear /(\[x\] |DONE: )(.*)$/i, (msg) ->
     person = msg.message.user.name
     thing = msg.match[2].trim()
     if thing.toLowerCase() is 'all' or thing.toLowerCase() is 'everything'
@@ -62,3 +64,4 @@ module.exports = (robot) ->
     else
       todos = getTodos person
       setTodos person, todos.filter (x) -> x isnt thing
+      msg.reply "Nice work, you finished doing " + thing
