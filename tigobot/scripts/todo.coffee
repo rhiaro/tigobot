@@ -11,9 +11,9 @@ module.exports = (robot) ->
   getTodos = (person) ->
     return robot.brain.users()[person].todo
 
-  robot.hear /TODO: (.*)$/i, (msg) ->
+  robot.hear /(TODO: |I NEED TO |\[ \] )(.*)$/i, (msg) ->
     person = msg.message.user.name
-    thing = msg.match[1]
+    thing = msg.match[2]
     if not robot.brain.users()[person].todo
       robot.brain.users()[person].todo = []
     robot.brain.users()[person].todo.push thing
