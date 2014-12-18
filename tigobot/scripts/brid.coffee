@@ -1,12 +1,8 @@
 # Description:
 #  brid
 
-random_text = (choices) ->
-  choices[Math.floor(Math.random() * choices.length)]
-
 module.exports = (robot) ->
 
-    probability = Math.random()
     noise = [
         "BIRDBIRDBIRDBIRDBIRDBIRDBIRD",
         "BIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRD",
@@ -26,8 +22,9 @@ module.exports = (robot) ->
     ]
 
     robot.hear /(.*)$/, (msg) ->
+        probability = Math.random()
         if probability > 0.9
-            msg.send random_text(noise)
+            msg.send msg.random noise
 
     robot.respond /WHOSABIRD/i, (msg) ->
         msg.send random_text(noise)
