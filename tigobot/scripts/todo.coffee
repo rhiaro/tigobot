@@ -34,8 +34,8 @@ module.exports = (robot) ->
   bored = (msg) ->
     todos = getTodos msg.message.user.name
     if todos and todos.length > 0
-      do = msg.random robot.brain.users()[msg.message.user.name].todo
-      msg.random m_bored + do
+      thing = msg.random robot.brain.users()[msg.message.user.name].todo
+      msg.random m_bored + thing
     else
       helpout msg
 
