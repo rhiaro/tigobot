@@ -24,7 +24,7 @@ module.exports = (robot) ->
 
   robot.hear /\?butt ?(.*)$/i, (msg) ->
     if msg.match[1]
-      person = msg.match[1]
+      person = msg.match[1].trim()
     else
       person = msg.message.user.name
     butts = getButts person
