@@ -24,7 +24,6 @@ module.exports = (robot) ->
   getButtmaster = () ->
     buttmaster = {name: "Buttmaster", butt: 0}
     findButtmaster = (user) ->
-      console.log user.name + user.butt
       if user.butt > buttmaster.butt
         buttmaster.butt = getButts user.name
         buttmaster.name = user.name
