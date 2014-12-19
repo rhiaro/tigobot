@@ -1,12 +1,8 @@
 # Description:
 #  brid
 
-random_text = (choices) ->
-  choices[Math.floor(Math.random() * choices.length)]
-
 module.exports = (robot) ->
 
-    probability = Math.random()
     noise = [
         "BIRDBIRDBIRDBIRDBIRDBIRDBIRD",
         "BIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRDBIRD",
@@ -25,9 +21,14 @@ module.exports = (robot) ->
         "/me puts his face on something."
     ]
 
+    bwark = (msg) ->
+        probability = Math.random()
+        if probability > 0.96
+            msg.send msg.random noise
+
     robot.hear /(.*)$/, (msg) ->
-        if probability > 0.9
-            msg.send random_text(noise)
+        setTimeout -> bwark msg, 2000
+        
 
     robot.respond /WHOSABIRD/i, (msg) ->
-        msg.send random_text(noise)
+        msg.send msg.random noise
