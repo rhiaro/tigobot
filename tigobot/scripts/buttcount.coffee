@@ -10,7 +10,7 @@ module.exports = (robot) ->
   getButts = (person) ->
     if robot.brain.userForName(person)
       if not robot.brain.userForName(person).butt
-        setButts person, butts
+        setButts person, 0
       return robot.brain.userForName(person).butt
 
   setButts = (person, butts) ->
