@@ -22,23 +22,23 @@ module.exports = (robot) ->
     "Soz.",
   ]
 
-  robot.hear /THANKS TIGO/i, (msg) ->
+  robot.hear /THANKS,? TIGO/i, (msg) ->
     msg.reply random_text(greetz)
 
-  robot.hear /THANK YOU TIGO/i, (msg) ->
+  robot.hear /THANK,? YOU TIGO/i, (msg) ->
     msg.reply random_text(greetz)
 
-  robot.hear /CHEERS TIGO/i, (msg) ->
+  robot.hear /CHEERS,? TIGO/i, (msg) ->
     msg.reply random_text(greetz)
 
-  robot.hear /PIPE DOWN TIGO/i, (msg) ->
+  robot.hear /PIPE DOWN,? TIGO/i, (msg) ->
     msg.reply random_text(apologies)
 
-  robot.hear /SHUT UP TIGO/i, (msg) ->
+  robot.hear /SHUT UP,? TIGO/i, (msg) ->
     msg.reply random_text(apologies)
 
-  robot.hear /BE QUIET TIGO/i, (msg) ->
+  robot.hear /BE QUIET,? TIGO/i, (msg) ->
     msg.reply random_text(apologies)
 
-  robot.hear /FUCK OFF TIGO/i, (msg) ->
+  robot.hear /FUCK OFF,? TIGO/i, (msg) ->
     msg.reply random_text(apologies)
