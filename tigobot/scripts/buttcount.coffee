@@ -10,7 +10,7 @@ module.exports = (robot) ->
   getButts = (person) ->
     if robot.brain.userForName(person)
       if not robot.brain.userForName(person).butt
-        setButts person, butts
+        setButts person, 0
       return robot.brain.userForName(person).butt
 
   setButts = (person, butts) ->
@@ -24,7 +24,7 @@ module.exports = (robot) ->
 
   robot.hear /\?butt ?(.*)$/i, (msg) ->
     if msg.match[1]
-      person = msg.match[1]
+      person = msg.match[1].trim()
     else
       person = msg.message.user.name
     butts = getButts person

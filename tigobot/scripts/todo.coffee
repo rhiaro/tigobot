@@ -16,6 +16,8 @@ module.exports = (robot) ->
 
   m_added = ["Gotcha.", "I've added that to your list.", "Just ask me if you forget."]
 
+  m_bored = ["Bored? Don't forget you need to do ", "You're bored? You could always do ", "If you're not doing anything else, don't forget you need to ", "You can't be bored, you need to ", "Bored? On your todo list is "]
+
   getTodos = (person) ->
     return robot.brain.users()[person].todo
 
@@ -28,6 +30,15 @@ module.exports = (robot) ->
       robot.brain.users()[person].todo = []
     robot.brain.users()[person].todo.push thing
     "You need to " + thing + ". " + msg.random(m_added)
+
+  bored = (msg) ->
+    todos = getTodos msg.message.user.name
+    if todos and todos.length > 0
+      thing = msg.random todos
+      b = msg.random m_bored
+      b + thing
+    else
+      helpout msg
 
   helpout = (msg) ->
     person = msg.message.user.name
@@ -68,10 +79,11 @@ module.exports = (robot) ->
       m = msg.random m_many
     else if c > 0
       m = msg.random m_some
-      #probability = Math.random()
-      #if probability > 0.9
-      #  help_message = helpout msg.message.user.name
-      #  m = m + help_message
+      probability = Math.random()
+      if probability > 0.9
+        help_message = helpout msg.message.user.name
+        if help_message
+          m = m + help_message
     else
       m = msg.random m_none
 
@@ -88,7 +100,7 @@ module.exports = (robot) ->
       setTodos person, todos.filter (x) -> x isnt thing
       msg.reply "Nice work, you finished doing " + thing
 
-  robot.hear /I'M BORED$/i, (msg) ->
-    help_message = helpout msg
-    if help_message
-      msg.reply help_message
+  robot.hear /I'M BORED|I AM BORED|WHAT SHOULD I DO|SO BORED$/i, (msg) ->
+    mess = bored msg
+    if mess
+      msg.reply mess
