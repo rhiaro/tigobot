@@ -6,13 +6,13 @@
 #   ?tea <user> - Announces your tea preference
 
 module.exports = (robot) ->
-  robot.hear /I LIKE MY TEA (.*)$/i, (msg) ->
+  robot.respond /I LIKE MY TEA (.*)$/i, (msg) ->
     person = msg.message.user.name
     preference = msg.match[1]
     robot.brain.set person + ':tea', preference
     msg.reply "Thanks, I've noted that down."
 
-  robot.hear /\?TEA (.*)$/i, (msg) ->
+  robot.respond /\?TEA (.*)$/i, (msg) ->
     person = msg.match[1]
     preference = robot.brain.get person + ':tea'
     if preference

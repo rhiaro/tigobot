@@ -41,7 +41,7 @@ module.exports = (robot) ->
   hour = d.getHours()
   minute = d.getMinutes()
 
-  robot.hear /FALAFEL/i, (msg) ->
+  robot.respond /FALAFEL/i, (msg) ->
 
     is_sam = msg.message.user.name == "samstarling"
     is_bbq_day = day == 5
@@ -55,5 +55,3 @@ module.exports = (robot) ->
     #  msg.reply "If only it was summer, it might be BBQ day. Go on then."
     else
       msg.reply positive_replies[Math.floor(Math.random() * positive_replies.length)]
-
-

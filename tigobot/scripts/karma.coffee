@@ -18,23 +18,23 @@ module.exports = (robot) ->
                 val = 1
             else if msg.match[2] is "--"
                 val = -1
-            
+
             current = robot.brain.get target + ":karma"
             karma = current + val
 
             robot.brain.set target + ":karma", karma
             msg.reply target + " has " + karma + " karma."
 
-    robot.hear /^karma(?:\s+@?(.*))?$/i, (msg) ->
+    robot.respond /^karma(?:\s+@?(.*))?$/i, (msg) ->
         target = msg.match[1] or msg.message.user.name
         msg.reply tellKarma target
 
-    robot.hear /HOW COOL AM I\?$/i, (msg) ->
+    robot.respond /HOW COOL AM I\?$/i, (msg) ->
         target = msg.message.user.name
         karma = robot.brain.get target + ":karma"
         msg.reply karmaMessage karma
 
-    robot.hear /(HOW COOL IS )(.*?)\?$/i, (msg) ->
+    robot.respond /(HOW COOL IS )(.*?)\?$/i, (msg) ->
         target = msg.match[2]
         karma = robot.brain.get target + ":karma"
         msg.reply karmaMessage karma
@@ -46,7 +46,7 @@ module.exports = (robot) ->
             response = "You have "
         else
             response = target + " has "
-    
+
         if karma is null
             karma = 0
         return response + karma + " karma."

@@ -53,13 +53,13 @@ module.exports = (robot) ->
       setTodo msg, "Help " + helpPerson + " with " + helpWith + "."
       helpMessage
 
-  robot.hear /(TODO: |I NEED TO |\[ \] |I HAVE TO |I SHOULD )(.*)$/i, (msg) ->
+  robot.respond /(TODO: |I NEED TO |\[ \] |I HAVE TO |I SHOULD )(.*)$/i, (msg) ->
     person = msg.message.user.name
     thing = msg.match[2].trim()
     setMessage = setTodo msg, thing
     msg.reply setMessage
 
-  robot.hear /((\?)?TODO(\?)?|WHAT'?S ON MY LIST(\?)?|WHAT DO I NEED TO DO(\?)?)$/i, (msg) ->
+  robot.respond /((\?)?TODO(\?)?|WHAT'?S ON MY LIST(\?)?|WHAT DO I NEED TO DO(\?)?)$/i, (msg) ->
     person = msg.message.user.name
     todos = getTodos person
     if not todos or todos.length == 0
@@ -67,7 +67,7 @@ module.exports = (robot) ->
     else
       msg.reply "You need to do: " + todos.join(", ")
 
-  robot.hear /SO MANY THINGS TO DO(\!)?|SO MUCH TO DO(\!)?|HOW MANY THINGS TO DO(\?)?$/i, (msg) ->
+  robot.respond /SO MANY THINGS TO DO(\!)?|SO MUCH TO DO(\!)?|HOW MANY THINGS TO DO(\?)?$/i, (msg) ->
 
     todos = getTodos msg.message.user.name
     c = todos.length
@@ -89,7 +89,7 @@ module.exports = (robot) ->
 
     msg.reply 'You have ' + c + ' things to do. ' + m
 
-  robot.hear /(\[x\] |DONE: )(.*)$/i, (msg) ->
+  robot.respond /(\[x\] |DONE: )(.*)$/i, (msg) ->
     person = msg.message.user.name
     thing = msg.match[2].trim()
     if thing.toLowerCase() is 'all' or thing.toLowerCase() is 'everything'
@@ -100,7 +100,7 @@ module.exports = (robot) ->
       setTodos person, todos.filter (x) -> x isnt thing
       msg.reply "Nice work, you finished doing " + thing
 
-  robot.hear /I'M BORED|I AM BORED|WHAT SHOULD I DO|SO BORED$/i, (msg) ->
+  robot.respond /I'M BORED|I AM BORED|WHAT SHOULD I DO|SO BORED$/i, (msg) ->
     mess = bored msg
     if mess
       msg.reply mess

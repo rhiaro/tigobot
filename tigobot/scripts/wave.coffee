@@ -27,10 +27,9 @@
 #         `'::::,,,,,,,,,,,,,,,::''
 
 module.exports = (robot) ->
-	
-	robot.hear /(o\/\*)/i, (msg) ->
+
+	robot.respond /(o\/\*)/i, (msg) ->
 		msg.reply "*\\o"
 
-	robot.hear /(\*\\o)/i, (msg) ->
+	robot.respond /(\*\\o)/i, (msg) ->
 		msg.reply "o/*"
-
