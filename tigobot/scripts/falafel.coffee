@@ -41,7 +41,7 @@ module.exports = (robot) ->
   hour = d.getHours()
   minute = d.getMinutes()
 
-  robot.respond /FALAFEL/i, (msg) ->
+  robot.hear /FALAFEL/i, (msg) ->
 
     is_sam = msg.message.user.name == "samstarling"
     is_bbq_day = day == 5
