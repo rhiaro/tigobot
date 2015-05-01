@@ -25,7 +25,7 @@ module.exports = (robot) ->
     person = msg.match[1]
     robot.brain.remove person + ':house'
 
-  robot.hear /\?HOUSE (.*)$/i, (msg) ->
+  robot.respond /\?HOUSE (.*)$/i, (msg) ->
     person = msg.match[1]
     house = robot.brain.get person + ':house'
     if house

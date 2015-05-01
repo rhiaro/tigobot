@@ -55,5 +55,3 @@ module.exports = (robot) ->
     #  msg.reply "If only it was summer, it might be BBQ day. Go on then."
     else
       msg.reply positive_replies[Math.floor(Math.random() * positive_replies.length)]
-
-
