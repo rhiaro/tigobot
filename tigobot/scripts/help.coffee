@@ -52,6 +52,8 @@ helpContents = (name, commands) ->
 </html>
   """
 
+concatHelp = ""
+
 module.exports = (robot) ->
   robot.respond /help\s*(.*)?$/i, (msg) ->
     cmds = robot.helpCommands()
@@ -70,8 +72,10 @@ module.exports = (robot) ->
       cmd.replace /hubot/ig, robot.name
 
     emit = cmds.join "\n"
-
-    msg.send emit
+    concatHelp += emit
+    
+    if cmds is "who is the buttmaster? - who says butt the most"
+      msg.send concatHelp
 
   robot.router.get "/#{robot.name}/help", (req, res) ->
     cmds = robot.helpCommands().map (cmd) ->
