@@ -53,13 +53,13 @@ module.exports = (robot) ->
       setTodo msg, "Help " + helpPerson + " with " + helpWith + "."
       helpMessage
 
-  robot.respond /(TODO: |I NEED TO |\[ \] |I HAVE TO |I SHOULD )(.*)$/i, (msg) ->
+  robot.respond /(TODO: |I NEED TO |I HAVE TO |I SHOULD )(.*)$/i, (msg) ->
     person = msg.message.user.name
     thing = msg.match[2].trim()
     setMessage = setTodo msg, thing
     msg.reply setMessage
   
-  robot.hear /\[ \](.*)$/i, (msg) ->
+  robot.hear /\[ \] (.*)$/i, (msg) ->
     person = msg.message.user.name
     thing = msg.match[2].trim()
     setMessage = setTodo msg, thing
