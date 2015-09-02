@@ -45,11 +45,11 @@ module.exports = (robot) ->
       butts = 0
     msg.reply person + " has " + butts + " butts"
 
-  robot.respond /^Who is the buttmaster\?$/i, (msg) ->
+  robot.respond /Who is the buttmaster\?/i, (msg) ->
     buttmaster = getButtmaster()
     msg.reply "The buttmaster is " + buttmaster.name + " with " + buttmaster.butt + " butts"
 
-  robot.respond /^Give (.*) (\d*(e\+\d*)?) butts$/i, (msg) ->
+  robot.respond /Give (.*) (\d*(e\+\d*)?) butts/i, (msg) ->
     buttmaster = getButtmaster()
     if msg.message.user.name == buttmaster.name
       person = msg.match[1].trim()
