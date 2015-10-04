@@ -25,7 +25,7 @@ module.exports = (robot) ->
             robot.brain.set target + ":karma", karma
             msg.reply target + " has " + karma + " karma."
 
-    robot.respond /^karma(?:\s+@?(.*))?$/i, (msg) ->
+    robot.respond /karma(?:\s+@?(.*))?/i, (msg) ->
         target = msg.match[1] or msg.message.user.name
         msg.reply tellKarma target
 

@@ -2,6 +2,6 @@
 #   Pub!
 
 module.exports = (robot) ->
-  robot.hear /pub/i, (msg) ->
+  robot.hear /^p+u+b+\??$/i, (msg) ->
     msg.reply "http://tardis.pub"
 
