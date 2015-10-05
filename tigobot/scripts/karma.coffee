@@ -11,7 +11,7 @@ module.exports = (robot) ->
 
     robot.hear /^@?(.*?)(\+\+|--)\s*$/, (msg) ->
         target = msg.match[1]
-        if target is msg.message.user.name
+        if target.toLowerCase() is msg.message.user.name.toLowerCase()
             msg.reply "That's cheating"
         else
             if msg.match[2] is "++"
@@ -19,10 +19,10 @@ module.exports = (robot) ->
             else if msg.match[2] is "--"
                 val = -1
 
-            current = robot.brain.get target + ":karma"
+            current = robot.brain.get target.toLowerCase() + ":karma"
             karma = current + val
 
-            robot.brain.set target + ":karma", karma
+            robot.brain.set target.toLowerCase() + ":karma", karma
             msg.reply target + " has " + karma + " karma."
 
     robot.respond /karma(?:\s+@?(.*))?/i, (msg) ->
@@ -31,18 +31,18 @@ module.exports = (robot) ->
 
     robot.respond /HOW COOL AM I\?$/i, (msg) ->
         target = msg.message.user.name
-        karma = robot.brain.get target + ":karma"
+        karma = robot.brain.get target.toLowerCase() + ":karma"
         msg.reply karmaMessage karma
 
     robot.respond /(HOW COOL IS )(.*?)\?$/i, (msg) ->
         target = msg.match[2]
-        karma = robot.brain.get target + ":karma"
+        karma = robot.brain.get target.toLowerCase() + ":karma"
         msg.reply karmaMessage karma
 
     tellKarma = (target) ->
-        karma = robot.brain.get target + ":karma"
+        karma = robot.brain.get target.toLowerCase() + ":karma"
         if not target
-            karma = robot.brain.get msg.message.user.name + ":karma"
+            karma = robot.brain.get msg.message.user.name.toLowerCase() + ":karma"
             response = "You have "
         else
             response = target + " has "
